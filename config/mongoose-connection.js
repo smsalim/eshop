@@ -1,12 +1,13 @@
 const mongoose = require('mongoose')
+const dbgr = require('debug')('development:mongoose')
 
 mongoose
 .connect('mongodb://localhost:27017/eshop')
 .then(() => {
-    console.log('Connected to MongoDB')
+    dbgr('Connected to MongoDB')
 })
 .catch((err) => {
-    console.log(err)
+    dbgr(err)
 })
 
 module.exports = mongoose.connection
