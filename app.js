@@ -6,7 +6,6 @@ const db = require('./config/mongoose-connection')
 const ownersRouter = require('./routes/ownersRouter')
 const usersRouter = require('./routes/usersRouter')
 const productsRouter = require('./routes/productsRouter')
-// require('dotenv').config()
 
 app.use(cookierParser())
 app.use(express.json())
@@ -17,8 +16,6 @@ app.set('view engine', 'ejs')
 app.use('/owners', ownersRouter)
 app.use('/users', usersRouter)
 app.use('/products', productsRouter)
-
-// console.log(process.env.NODE_ENV)
 
 app.listen(3000, () => {
   console.log('Server is running on http://localhost:3000')
