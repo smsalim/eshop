@@ -6,7 +6,7 @@ const userSchema = mongoose.Schema({
     minLength: 3,
     trim: true
 },
-  email: String,
+  email: {type: String, unique: true, required: true, trim: true},
   password: String,
   cart: {
     type: Array,
@@ -16,7 +16,7 @@ const userSchema = mongoose.Schema({
     type: Array,
     default: []
   },
-  contact: Number,
+  contact: {type: Number, unique: true, sparse: true},
   picture: String
 })
 
