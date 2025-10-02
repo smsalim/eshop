@@ -5,9 +5,11 @@ const cookie = require('cookie-parser')
 const { generateToken } = require('../utils/generateToken')
 
 
-module.exports.registerUser = (req, res) => {
+module.exports.registerUser = async (req, res) => {
     try {
         let {fullname, email, password} = req.body
+        let user = await usersModel.findOne({email: email})
+        if (user) return res.status(401).send('You already have an account')
         bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(password, salt, async (err, hash) => {
                 if (err) return res.send(err.massage)
