@@ -21,7 +21,7 @@ module.exports.registerUser = async (req, res) => {
                 })
                 let token = generateToken(user)
                 res.cookie('token', token)
-                res.send(user)
+                res.redirect('/shop')
             }
             })
         })
@@ -30,4 +30,19 @@ module.exports.registerUser = async (req, res) => {
         res.send(err.massage)
     }
 
+}
+
+module.exports.loginUser = async (req, res) => {
+    let { email, password } = req.body
+    let user = await usersModel.findOne({email: email})
+    if (!user) return res.send('Email or Password incorrect')
+    bcrypt.compare(password, user.password, (err, result) => {
+        if (result) {
+            let token = generateToken(user)
+            res.cookie('token', token)
+            res.redirect('/shop')
+        } else {
+            return res.send('incorrect password')
+        }
+    })
 }
