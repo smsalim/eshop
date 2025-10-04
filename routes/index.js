@@ -11,4 +11,8 @@ router.get('/shop', isLoggedIn, (req, res) => {
     res.render('shop')
 })
 
+router.get('/logout', isLoggedIn, (req, res) => {
+    res.redirect('/')
+})
+
 module.exports = router
